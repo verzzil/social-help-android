@@ -5,9 +5,11 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import ru.itis.socialhelp.data.repositories.CategoriesRepository
+import ru.itis.socialhelp.data.repositories.DataStorePreferencesRepository
 import ru.itis.socialhelp.data.repositories.SpecialistsRepository
 import ru.itis.socialhelp.data.repositories.SpecializationsRepository
 import ru.itis.socialhelp.data.repositories.impl.CategoriesRepositoryImpl
+import ru.itis.socialhelp.data.repositories.impl.DataStorePreferencesRepositoryImpl
 import ru.itis.socialhelp.data.repositories.impl.SpecialistsRepositoryImpl
 import ru.itis.socialhelp.data.repositories.impl.SpecializationsRepositoryImpl
 
@@ -23,4 +25,7 @@ abstract class RepoModule {
 
     @Binds
     abstract fun bindCategoriesRepository(repo: CategoriesRepositoryImpl): CategoriesRepository
+
+    @Binds
+    abstract fun bindDataStorePreferencesRepository(repo: DataStorePreferencesRepositoryImpl): DataStorePreferencesRepository
 }

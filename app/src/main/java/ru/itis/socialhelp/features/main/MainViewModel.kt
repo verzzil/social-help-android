@@ -48,7 +48,7 @@ class MainViewModel @Inject constructor(
                     }
             }
         }.invokeOnCompletion {
-            Log.i("asdfasdf", "quit")
+//            Log.i("asdfasdf", "quit")
         }
     }
 

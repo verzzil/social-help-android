@@ -1,13 +1,19 @@
 package ru.itis.socialhelp
 
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.SideEffect
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.lifecycleScope
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import ru.itis.socialhelp.features.common.AppViewModel
 import ru.itis.socialhelp.features.common.ApplicationScreen
 import ru.itis.socialhelp.ui.theme.AppTheme
