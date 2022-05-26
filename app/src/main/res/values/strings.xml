@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Social Help</string>
+
+    <string name="open_search_menu">Открыть поисковое меню</string>
+    <string name="back">Назад</string>
+
+<!--  Drawer screen  -->
+    <string name="drawer_my_profile">Мой профиль</string>
+    <string name="drawer_my_chats">Мои сообщений</string>
+    <string name="drawer_my_timetable">Мое расписание</string>
+    <string name="drawer_settings">Настройки</string>
+    <string name="drawer_quit">Выйти</string>
+
+<!--  Main screen  /-->
+    <string name="main_toolbar_title">Онлайн консультация</string>
+    <string name="main_problems">Проблемы</string>
+    <string name="main_all_doctors">Специалисты</string>
+    <string name="main_all_doctors_btn">Все</string>
+
+<!--  Chat screen  -->
+    <string name="chat_placeholder_input_msg">Сообщение</string>
+
+<!--  Content description  -->
+    <string name="cd_open_all_categories">Открыть всех специалистов</string>
+    <string name="cd_category_item">Фотография категории</string>
+    <string name="cd_user_image">Аватарка пользователя</string>
+    <string name="cd_logo">Логотип приложения</string>
+
+</resources>
