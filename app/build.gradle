@@ -52,8 +52,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$vm_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.navigation:navigation-compose:$nav_version"
-    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
-    implementation "com.google.accompanist:accompanist-flowlayout:$accompanist_version"
+    // endregion
+    
+    // region accompanist
+    implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_system_ui_controller_version"
+    implementation "com.google.accompanist:accompanist-pager:$accompanist_pager_version"
+    implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_pager_version"
     // endregion
 
     // region Coroutines

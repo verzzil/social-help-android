@@ -29,6 +29,8 @@ import ru.itis.socialhelp.features.chat.ChatViewModel
 import ru.itis.socialhelp.features.common.mvi.AppEvent
 import ru.itis.socialhelp.features.common.mvi.AppViewState
 import ru.itis.socialhelp.features.drawer.DrawerScreen
+import ru.itis.socialhelp.features.login.LoginScreen
+import ru.itis.socialhelp.features.login.LoginViewModel
 import ru.itis.socialhelp.features.main.MainScreen
 import ru.itis.socialhelp.features.main.MainToolbar
 import ru.itis.socialhelp.features.main.MainViewModel
@@ -119,6 +121,7 @@ private fun AppBarHost(modifier: Modifier = Modifier, navController: NavControll
             )
         }
         composable(Navigation.Profile.name) {}
+        composable(Navigation.Login.name) {}
     }
 }
 
@@ -142,6 +145,10 @@ private fun ContentHost(navController: NavController) {
         composable(Navigation.Profile.name) {
             val profileViewMode = hiltViewModel<ProfileViewModel>()
             ProfileScreen(viewModel = profileViewMode)
+        }
+        composable(Navigation.Login.name) {
+            val loginViewModel = hiltViewModel<LoginViewModel>()
+            LoginScreen(viewModel = loginViewModel)
         }
     }
 }
