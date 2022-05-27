@@ -24,6 +24,10 @@ data class Colors(
     val inputMessageDividerColor: Color,
     val disabledMessageSendIconColor: Color,
     val messageSendIconColor: Color,
+
+    // Profile
+    val profileBackgroundColor: Color,
+    val specialistTitleColor: Color
 )
 
 val lightPalette = Colors(
@@ -45,5 +49,7 @@ val lightPalette = Colors(
     messageInputColor = Color(0xFFffffff),
     inputMessageDividerColor = Color(0xFFE1E1E1),
     messageSendIconColor = Color(0xFF007BFE),
-    disabledMessageSendIconColor = Color(0x10D0CCC7)
+    disabledMessageSendIconColor = Color(0x10D0CCC7),
+    profileBackgroundColor = Color(0xff98E38D),
+    specialistTitleColor = Color(0xff905BB0)
 )

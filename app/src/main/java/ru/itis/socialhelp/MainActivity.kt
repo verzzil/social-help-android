@@ -17,7 +17,10 @@ import kotlinx.coroutines.flow.flowOf
 import ru.itis.socialhelp.features.common.AppViewModel
 import ru.itis.socialhelp.features.common.ApplicationScreen
 import ru.itis.socialhelp.ui.theme.AppTheme
+import ru.itis.socialhelp.ui.theme.AppTheme.colors
+import ru.itis.socialhelp.ui.theme.AppTheme.systemUiController
 import ru.itis.socialhelp.ui.theme.LocalColorProvider
+import ru.itis.socialhelp.ui.theme.LocalSystemUiController
 import ru.itis.socialhelp.ui.theme.SocialHelpTheme
 
 @AndroidEntryPoint
@@ -28,13 +31,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             SocialHelpTheme {
 
-                val systemUiController = rememberSystemUiController()
+                val systemUiController = systemUiController
+                val colors = colors
 
-                // Set status bar color
-                val primaryBackground = LocalColorProvider.current.primaryBackground
                 SideEffect {
                     systemUiController.setSystemBarsColor(
-                        color = primaryBackground,
+                        color = colors.primaryBackground,
                         darkIcons = true
                     )
                 }

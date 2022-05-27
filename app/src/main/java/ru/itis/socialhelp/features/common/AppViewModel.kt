@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import ru.itis.socialhelp.data.repositories.DataStorePreferencesRepository
 import ru.itis.socialhelp.features.base.BaseViewModel
 import ru.itis.socialhelp.features.common.models.User
+import ru.itis.socialhelp.features.common.models.testUser
 import ru.itis.socialhelp.features.common.mvi.AppEvent
 import ru.itis.socialhelp.features.common.mvi.AppViewState
 import javax.inject.Inject

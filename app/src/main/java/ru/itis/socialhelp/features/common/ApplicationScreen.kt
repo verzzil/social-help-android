@@ -33,9 +33,12 @@ import ru.itis.socialhelp.features.main.MainScreen
 import ru.itis.socialhelp.features.main.MainToolbar
 import ru.itis.socialhelp.features.main.MainViewModel
 import ru.itis.socialhelp.features.profile.ProfileScreen
+import ru.itis.socialhelp.features.profile.ProfileToolbar
 import ru.itis.socialhelp.features.profile.ProfileViewModel
 import ru.itis.socialhelp.features.splash.SplashScreen
 import ru.itis.socialhelp.navigation.Navigation
+import ru.itis.socialhelp.ui.theme.AppTheme.appViewModel
+import ru.itis.socialhelp.ui.theme.AppTheme.mainNavController
 import ru.itis.socialhelp.ui.theme.LocalNavControllerProvider
 import ru.itis.socialhelp.ui.theme.LocalViewModelProvider
 import kotlin.math.roundToInt
@@ -44,8 +47,7 @@ val startDestination = Navigation.Splash.name
 
 @Composable
 fun ApplicationScreen() {
-    val navController = LocalNavControllerProvider.current
-    val appViewModel = LocalViewModelProvider.current
+    val navController = mainNavController
     val scaffoldState = rememberScaffoldState()
 
     val viewState by appViewModel.viewState.collectAsState()
