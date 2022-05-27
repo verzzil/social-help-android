@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.itis.socialhelp.R
 import ru.itis.socialhelp.features.common.mvi.AppEvent
+import ru.itis.socialhelp.ui.theme.AppTheme.appViewModel
 import ru.itis.socialhelp.ui.theme.LocalViewModelProvider
 
 @Composable
@@ -19,22 +20,38 @@ fun ColumnScope.DrawerMenuItem(
     title: String,
     onClick: () -> Unit,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    needWeight: Boolean = true
 ) {
-    val appViewModel = LocalViewModelProvider.current
+    val appViewModel = appViewModel
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .weight(.2f)
-            .clickable(
-                onClick = {
-                    onClick()
-                    appViewModel.obtainEvent(AppEvent.NeedCloseDrawer)
-                },
-                indication = rememberRipple(bounded = true),
-                interactionSource = MutableInteractionSource()
-            )
-            .padding(horizontal = 12.dp),
+        modifier = when {
+            needWeight ->
+                Modifier
+                    .fillMaxWidth()
+                    .weight(.2f)
+                    .clickable(
+                        onClick = {
+                            onClick()
+                            appViewModel.obtainEvent(AppEvent.NeedCloseDrawer)
+                        },
+                        indication = rememberRipple(bounded = true),
+                        interactionSource = MutableInteractionSource()
+                    )
+                    .padding(horizontal = 12.dp)
+            else ->
+                Modifier
+                    .fillMaxWidth()
+                    .clickable(
+                        onClick = {
+                            onClick()
+                            appViewModel.obtainEvent(AppEvent.NeedCloseDrawer)
+                        },
+                        indication = rememberRipple(bounded = true),
+                        interactionSource = MutableInteractionSource()
+                    )
+                    .padding(horizontal = 12.dp, vertical = 16.dp)
+        },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = horizontalArrangement
     ) {

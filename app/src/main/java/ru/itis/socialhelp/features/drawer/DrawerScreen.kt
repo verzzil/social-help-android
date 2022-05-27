@@ -1,8 +1,11 @@
 package ru.itis.socialhelp.features.drawer
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -20,18 +23,32 @@ import androidx.navigation.NavController
 import com.skydoves.landscapist.glide.GlideImage
 import ru.itis.socialhelp.R
 import ru.itis.socialhelp.features.common.mvi.AppEvent
+import ru.itis.socialhelp.features.common.mvi.AppViewState
 import ru.itis.socialhelp.features.drawer.views.DrawerMenuItem
 import ru.itis.socialhelp.navigation.Navigation
+import ru.itis.socialhelp.ui.theme.AppTheme.appViewModel
+import ru.itis.socialhelp.ui.theme.AppTheme.mainNavController
 import ru.itis.socialhelp.ui.theme.LocalNavControllerProvider
 import ru.itis.socialhelp.ui.theme.LocalViewModelProvider
 
 @Composable
 fun DrawerScreen() {
-    val navController = LocalNavControllerProvider.current
-    val appViewModel = LocalViewModelProvider.current
+    val navController = mainNavController
+    val appViewModel = appViewModel
 
     val viewState by appViewModel.viewState.collectAsState()
 
+    if (viewState.currentUser != null)
+        LoggedDrawer(viewState, navController)
+    else
+        UnLoggedDrawer(navController)
+}
+
+@Composable
+private fun LoggedDrawer(
+    viewState: AppViewState,
+    navController: NavController
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -104,5 +121,33 @@ fun DrawerScreen() {
             )
             Spacer(modifier = Modifier.weight(1f))
         }
+    }
+}
+
+@Composable
+private fun UnLoggedDrawer(navController: NavController) {
+    Column {
+        Text(
+            text = stringResource(id = R.string.drawer_not_logged_in),
+            fontSize = 18.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+                .padding(horizontal = 12.dp, vertical = 8.dp)
+        )
+
+        DrawerMenuItem(
+            title = stringResource(id = R.string.drawer_sign_in),
+            onClick = {
+                navController.navigate(Navigation.Login.name)
+            },
+            needWeight = false
+        )
+        /*DrawerMenuItem(
+            title = stringResource(id = R.string.drawer_sign_up),
+            onClick = {
+                navController.navigate(Navigation.Login.name)
+            },
+            needWeight = false
+        )*/
     }
 }

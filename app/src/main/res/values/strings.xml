@@ -10,6 +10,9 @@
     <string name="drawer_my_timetable">Мое расписание</string>
     <string name="drawer_settings">Настройки</string>
     <string name="drawer_quit">Выйти</string>
+    <string name="drawer_not_logged_in">Вы не вошли в систему</string>
+    <string name="drawer_sign_in">Вход</string>
+    <string name="drawer_sign_up">Регистрация</string>
 
 <!--  Main screen  /-->
     <string name="main_toolbar_title">Онлайн консультация</string>
@@ -19,6 +22,12 @@
 
 <!--  Chat screen  -->
     <string name="chat_placeholder_input_msg">Сообщение</string>
+
+<!--  Login screen  -->
+    <string name="login_enter_login">Введите логин</string>
+    <string name="login_enter_pass">Введите пароль</string>
+    <string name="login_login">Войти</string>
+    <string name="login_">Войти</string>
 
 <!--  Content description  -->
     <string name="cd_open_all_categories">Открыть всех специалистов</string>
