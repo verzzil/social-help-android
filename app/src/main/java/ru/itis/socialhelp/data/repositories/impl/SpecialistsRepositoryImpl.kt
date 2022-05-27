@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import ru.itis.socialhelp.features.main.models.testCategoryList
+import ru.itis.socialhelp.features.specialists.models.SpecialistItem
+import ru.itis.socialhelp.features.specialists.models.testSpecialistList
 import javax.inject.Inject
 
 class SpecialistsRepositoryImpl @Inject constructor(
@@ -25,5 +27,10 @@ class SpecialistsRepositoryImpl @Inject constructor(
     override suspend fun findAllSpecialists(): List<CategoryItem> {
         delay(5000)
         return testCategoryList
+    }
+
+    override suspend fun findSpecialistsByCategoryId(id: Long): List<SpecialistItem> {
+        delay(500)
+        return testSpecialistList
     }
 }

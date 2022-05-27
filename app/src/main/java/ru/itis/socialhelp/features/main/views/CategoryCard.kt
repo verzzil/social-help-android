@@ -79,7 +79,7 @@ fun CategoryCard(
 }
 
 @Composable
-fun SpecialistCardShimmer(modifier: Modifier = Modifier) {
+fun CategoryCardShimmer(modifier: Modifier = Modifier) {
     Shimmer(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,

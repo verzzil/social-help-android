@@ -1,5 +1,5 @@
 package ru.itis.socialhelp
 
 object AppConfig {
-    const val BASE_URL = "http://xannanov.com"
+    const val BASE_URL = "https://1e45-178-205-205-214.eu.ngrok.io"
 }
