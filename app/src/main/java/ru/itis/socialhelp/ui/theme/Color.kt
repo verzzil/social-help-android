@@ -3,6 +3,7 @@ package ru.itis.socialhelp.ui.theme
 import androidx.compose.ui.graphics.Color
 
 data class Colors(
+    val mainColor: Color,
     val primaryBackground: Color,
     val secondaryBackground: Color,
     val headerTextColor: Color,
@@ -31,6 +32,7 @@ data class Colors(
 )
 
 val lightPalette = Colors(
+    mainColor = Color(0xff98E38D),
     primaryBackground = Color.White,
     secondaryBackground = Color(0x10D0CCC7),
     headerTextColor = Color(0xFF311F09),

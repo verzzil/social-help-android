@@ -10,6 +10,9 @@
     <string name="drawer_my_timetable">Мое расписание</string>
     <string name="drawer_settings">Настройки</string>
     <string name="drawer_quit">Выйти</string>
+    <string name="drawer_not_logged_in">Вы не вошли в систему</string>
+    <string name="drawer_sign_in">Вход</string>
+    <string name="drawer_sign_up">Регистрация</string>
 
     <!--  Main screen  /-->
     <string name="main_toolbar_title">Онлайн консультация</string>
@@ -25,10 +28,23 @@
     <string name="profile_title">Профиль</string>
 
     <!--  Content description  -->
+<!--  Login screen  -->
+    <string name="login_enter_login">Введите логин</string>
+    <string name="login_enter_pass">Введите пароль</string>
+    <string name="login_login">Войти</string>
+    <string name="login_">Войти</string>
+
+<!--  Categories screen  -->
+    <string name="categories_title">Все категории</string>
+    <string name="categories_search_placeholder">Введите название специальность</string>
+
+<!--  Content description  -->
     <string name="cd_open_all_categories">Открыть всех специалистов</string>
     <string name="cd_category_item">Фотография категории</string>
     <string name="cd_user_image">Аватарка пользователя</string>
     <string name="cd_logo">Логотип приложения</string>
     <string name="cd_send_message">Отправить сообщение</string>
     <string name="cd_open_settings">Открыть настройки профиля</string>
+    <string name="cd_close_search_menu">Закрыть меню поиска</string>
+
 </resources>

@@ -21,5 +21,6 @@ ext {
     compose_constraint_version = "1.0.0"
     nav_version = "2.4.2"
     nav_compose = "1.0.0"
-    accompanist_version = "0.18.0"
+    accompanist_system_ui_controller_version = "0.18.0"
+    accompanist_pager_version = "0.24.9-beta"
 }

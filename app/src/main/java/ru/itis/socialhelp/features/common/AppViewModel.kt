@@ -21,6 +21,7 @@ class AppViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            dataStorePreferencesRepository.setCurrentUser(User())
             dataStorePreferencesRepository.userPreferencesFlow
                 .collect {
                     _viewState.value = _viewState.value.copy(currentUser = it)

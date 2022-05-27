@@ -6,10 +6,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import ru.itis.socialhelp.data.repositories.CategoriesRepository
-import ru.itis.socialhelp.data.repositories.SpecialistsRepository
 import ru.itis.socialhelp.data.repositories.SpecializationsRepository
 import ru.itis.socialhelp.features.base.BaseViewModel
 import ru.itis.socialhelp.features.main.mvi.MainEvent
@@ -34,7 +32,7 @@ class MainViewModel @Inject constructor(
                 val temp = categoriesRepository.findAllCategories()
                 _viewState.value = _viewState.value.copy(
                     isDoctorsLoading = false,
-                    specialists = temp
+                    categories = temp
                 )
             }
 
