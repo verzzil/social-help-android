@@ -1,13 +1,14 @@
 package ru.itis.socialhelp.features.main
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -21,108 +22,125 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.itis.socialhelp.R
 import ru.itis.socialhelp.features.main.views.CategoryCard
-import ru.itis.socialhelp.features.main.views.SpecialistCardShimmer
+import ru.itis.socialhelp.features.main.views.CategoryCardShimmer
 import ru.itis.socialhelp.features.main.views.SpecializationCard
 import ru.itis.socialhelp.features.main.views.SpecializationCardShimmer
+import ru.itis.socialhelp.navigation.Navigation
+import ru.itis.socialhelp.ui.theme.AppTheme.mainNavController
 import ru.itis.socialhelp.ui.theme.LocalColorProvider
 import ru.itis.socialhelp.ui.theme.LocalNavControllerProvider
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
-    val navController = LocalNavControllerProvider.current
+    val navController = mainNavController
     val viewState by viewModel.viewState.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(LocalColorProvider.current.primaryBackground)
-            .verticalScroll(rememberScrollState())
-    ) {
-        Text(
-            text = stringResource(id = R.string.main_problems),
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp)
-        )
-        LazyRow {
-            if (viewState.isProblemsLoading)
-                items(5) {
-                    SpecializationCardShimmer(
-                        modifier = Modifier
-                            .padding(horizontal = 12.dp)
-                    )
-                }
-            else
-                items(viewState.problems) { specialization ->
-                    SpecializationCard(
-                        specialization = specialization,
-                        modifier = Modifier
-                            .padding(horizontal = 12.dp)
-                            .clickable(
-                                onClick = {
-//                                    TODO("Логика открытия проблемы")
-                                },
-                                indication = rememberRipple(bounded = true),
-                                interactionSource = MutableInteractionSource()
-                            )
-                    )
-                }
+    Scaffold(
+        topBar = {
+            MainToolbar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(60.dp),
+            )
         }
-
-        Row(
+    ) {
+        Column(
             modifier = Modifier
-                .padding(top = 12.dp, start = 12.dp, bottom = 4.dp),
-            verticalAlignment = Alignment.CenterVertically
+                .fillMaxSize()
+                .background(LocalColorProvider.current.primaryBackground)
+                .verticalScroll(rememberScrollState())
         ) {
             Text(
-                text = stringResource(id = R.string.main_all_doctors),
+                text = stringResource(id = R.string.main_problems),
                 fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(horizontal = 12.dp, vertical = 12.dp)
             )
-
-            Spacer(modifier = Modifier.weight(1f))
+            LazyRow {
+                if (viewState.isProblemsLoading)
+                    items(5) {
+                        SpecializationCardShimmer(
+                            modifier = Modifier
+                                .padding(horizontal = 12.dp)
+                        )
+                    }
+                else
+                    items(viewState.problems) { specialization ->
+                        SpecializationCard(
+                            specialization = specialization,
+                            modifier = Modifier
+                                .padding(horizontal = 12.dp)
+                                .clickable(
+                                    onClick = {
+//                                    TODO("Логика открытия проблемы")
+                                    },
+                                    indication = rememberRipple(bounded = true),
+                                    interactionSource = MutableInteractionSource()
+                                )
+                        )
+                    }
+            }
 
             Row(
+                modifier = Modifier
+                    .padding(top = 12.dp, start = 12.dp, bottom = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = stringResource(id = R.string.main_all_doctors_btn),
-                    fontSize = 14.sp
+                    text = stringResource(id = R.string.main_all_doctors),
+                    fontWeight = FontWeight.Bold,
                 )
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_chevron_right_24),
-                    contentDescription = stringResource(id = R.string.cd_open_all_categories)
-                )
-            }
-        }
 
-        if (viewState.isDoctorsLoading)
-            repeat(3) {
-                SpecialistCardShimmer(
+                Spacer(modifier = Modifier.weight(1f))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .height(140.dp)
-                        .padding(
-                            horizontal = 12.dp,
-                            vertical = 8.dp
-                        )
-                )
+                        .clickable {
+                            navController.navigate(Navigation.Categories.name)
+                        }
+                ) {
+                    Text(
+                        text = stringResource(id = R.string.main_all_doctors_btn),
+                        fontSize = 14.sp
+                    )
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_baseline_chevron_right_24),
+                        contentDescription = stringResource(id = R.string.cd_open_all_categories)
+                    )
+                }
             }
-        else
-            repeat(viewState.specialists.size) {
-                CategoryCard(
-                    modifier = Modifier
-                        .height(140.dp)
-                        .padding(
-                            horizontal = 12.dp,
-                            vertical = 8.dp
-                        )
-                        .clickable(
-                            onClick = {
+
+            if (viewState.isDoctorsLoading)
+                repeat(3) {
+                    CategoryCardShimmer(
+                        modifier = Modifier
+                            .height(140.dp)
+                            .padding(
+                                horizontal = 12.dp,
+                                vertical = 8.dp
+                            )
+                    )
+                }
+            else
+                repeat(viewState.categories.size) {
+                    CategoryCard(
+                        modifier = Modifier
+                            .height(140.dp)
+                            .padding(
+                                horizontal = 12.dp,
+                                vertical = 8.dp
+                            )
+                            .clickable(
+                                onClick = {
 //                                    TODO("Логика открытия категории")
-                            },
-                            indication = rememberRipple(bounded = true),
-                            interactionSource = MutableInteractionSource()
-                        ),
-                    specialist = viewState.specialists[it]
-                )
-            }
+                                },
+                                indication = rememberRipple(bounded = true),
+                                interactionSource = MutableInteractionSource()
+                            ),
+                        specialist = viewState.categories[it]
+                    )
+                }
+        }
     }
 }

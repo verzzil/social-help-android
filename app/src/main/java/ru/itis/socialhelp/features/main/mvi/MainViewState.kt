@@ -7,6 +7,5 @@ data class MainViewState(
     val isProblemsLoading: Boolean = true,
     val isDoctorsLoading: Boolean = true,
     val problems: List<SpecializationItem> = emptyList(),
-    val mySpecialists: List<CategoryItem> = emptyList(),
-    val specialists: List<CategoryItem> = emptyList(),
+    val categories: List<CategoryItem> = emptyList(),
 )

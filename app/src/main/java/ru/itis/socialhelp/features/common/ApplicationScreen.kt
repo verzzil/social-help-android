@@ -1,5 +1,6 @@
 package ru.itis.socialhelp.features.common
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -23,6 +24,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ru.itis.socialhelp.features.categories.CategoriesScreen
+import ru.itis.socialhelp.features.categories.CategoriesViewModel
 import ru.itis.socialhelp.features.chat.ChatScreen
 import ru.itis.socialhelp.features.chat.ChatToolbar
 import ru.itis.socialhelp.features.chat.ChatViewModel
@@ -36,6 +39,8 @@ import ru.itis.socialhelp.features.main.MainToolbar
 import ru.itis.socialhelp.features.main.MainViewModel
 import ru.itis.socialhelp.features.profile.ProfileScreen
 import ru.itis.socialhelp.features.profile.ProfileViewModel
+import ru.itis.socialhelp.features.specialists.SpecialistsScreen
+import ru.itis.socialhelp.features.specialists.SpecialistsViewModel
 import ru.itis.socialhelp.features.splash.SplashScreen
 import ru.itis.socialhelp.navigation.Navigation
 import ru.itis.socialhelp.ui.theme.LocalNavControllerProvider
@@ -44,6 +49,7 @@ import kotlin.math.roundToInt
 
 val startDestination = Navigation.Splash.name
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun ApplicationScreen() {
     val navController = LocalNavControllerProvider.current
@@ -58,14 +64,6 @@ fun ApplicationScreen() {
         modifier = Modifier
             .fillMaxSize(),
         scaffoldState = scaffoldState,
-        topBar = {
-            AppBarHost(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(60.dp),
-                navController = navController
-            )
-        },
         drawerContent = {
             DrawerScreen()
         },
@@ -102,30 +100,6 @@ private fun manageDrawerState(
 }
 
 @Composable
-private fun AppBarHost(modifier: Modifier = Modifier, navController: NavController) {
-    NavHost(
-        navController = navController as NavHostController,
-        startDestination = startDestination
-    ) {
-        composable(Navigation.Splash.name) {}
-        composable(Navigation.Main.name) {
-            MainToolbar(
-                modifier = modifier,
-            )
-        }
-        composable(Navigation.Chat.name) {
-            val chatViewModel = hiltViewModel<ChatViewModel>()
-            ChatToolbar(
-                viewModel = chatViewModel,
-                modifier = modifier
-            )
-        }
-        composable(Navigation.Profile.name) {}
-        composable(Navigation.Login.name) {}
-    }
-}
-
-@Composable
 private fun ContentHost(navController: NavController) {
     NavHost(
         navController = navController as NavHostController,
@@ -149,6 +123,17 @@ private fun ContentHost(navController: NavController) {
         composable(Navigation.Login.name) {
             val loginViewModel = hiltViewModel<LoginViewModel>()
             LoginScreen(viewModel = loginViewModel)
+        }
+        composable(Navigation.Categories.name) {
+            val categoriesViewModel = hiltViewModel<CategoriesViewModel>()
+            CategoriesScreen(viewModel = categoriesViewModel)
+        }
+        composable("${Navigation.Specialists.name}/{categoryId}") {
+            val specialistsViewModel = hiltViewModel<SpecialistsViewModel>()
+            SpecialistsScreen(
+                viewModel = specialistsViewModel,
+                it.arguments?.getLong("categoryId") ?: 0
+            )
         }
     }
 }

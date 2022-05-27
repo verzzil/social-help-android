@@ -29,10 +29,15 @@
     <string name="login_login">Войти</string>
     <string name="login_">Войти</string>
 
+<!--  Categories screen  -->
+    <string name="categories_title">Все категории</string>
+    <string name="categories_search_placeholder">Введите название специальность</string>
+
 <!--  Content description  -->
     <string name="cd_open_all_categories">Открыть всех специалистов</string>
     <string name="cd_category_item">Фотография категории</string>
     <string name="cd_user_image">Аватарка пользователя</string>
     <string name="cd_logo">Логотип приложения</string>
+    <string name="cd_close_search_menu">Закрыть меню поиска</string>
 
 </resources>
