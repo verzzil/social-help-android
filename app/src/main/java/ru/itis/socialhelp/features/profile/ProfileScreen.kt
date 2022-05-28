@@ -254,6 +254,8 @@ fun ProfileScreen(
                         )
                     }
 
+                    Log.i("asdfasdf", "${appViewState.currentUser?.id != viewState.user.id} ${appViewState.currentUser?.isSpecialist == true}")
+                    Log.i("asdfasdf", "${appViewState.currentUser?.id} ${viewState.user.id} ${appViewState.currentUser}")
                     if (appViewState.currentUser?.id != viewState.user.id && appViewState.currentUser?.isSpecialist == true) {
                         FloatingActionButton(
                             modifier = Modifier

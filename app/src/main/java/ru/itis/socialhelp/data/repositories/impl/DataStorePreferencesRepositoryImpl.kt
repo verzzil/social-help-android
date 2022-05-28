@@ -1,10 +1,7 @@
 package ru.itis.socialhelp.data.repositories.impl
 
 import android.content.Context
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
@@ -23,6 +20,7 @@ private val USER_PATRONYMIC = stringPreferencesKey("user_patronymic")
 private val USER_IMAGE = stringPreferencesKey("user_image")
 private val ACCESS_TOKEN = stringPreferencesKey("access_token")
 private val REFRESH_TOKEN = stringPreferencesKey("REFRESH_TOKEN")
+private val IS_SPECIALIST = booleanPreferencesKey("IS_SPECIALIST")
 
 private val Context.dataStore by preferencesDataStore(
     name = USER_PREFERENCES_NAME
@@ -52,6 +50,7 @@ class DataStorePreferencesRepositoryImpl @Inject constructor(
             preferences[USER_IMAGE] = user.image
             preferences[ACCESS_TOKEN] = user.accessToken
             preferences[REFRESH_TOKEN] = user.refreshToken
+            preferences[IS_SPECIALIST] = user.isSpecialist
         }
     }
 
@@ -70,7 +69,8 @@ class DataStorePreferencesRepositoryImpl @Inject constructor(
                 patronymic = preferences[USER_PATRONYMIC] ?: "",
                 image = preferences[USER_IMAGE] ?: "",
                 accessToken = preferences[ACCESS_TOKEN] ?: "",
-                refreshToken = preferences[REFRESH_TOKEN] ?: ""
+                refreshToken = preferences[REFRESH_TOKEN] ?: "",
+                isSpecialist = preferences[IS_SPECIALIST] ?: false
             )
         }
 }
