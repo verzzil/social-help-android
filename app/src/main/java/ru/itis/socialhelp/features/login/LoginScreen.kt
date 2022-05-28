@@ -3,10 +3,7 @@ package ru.itis.socialhelp.features.login
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +18,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import ru.itis.socialhelp.R
+import ru.itis.socialhelp.features.common.mvi.AppEvent
 import ru.itis.socialhelp.features.login.mvi.LoginEvent
 import ru.itis.socialhelp.features.login.mvi.LoginViewState
 import ru.itis.socialhelp.ui.theme.AppTheme.appViewModel
@@ -35,6 +33,12 @@ fun LoginScreen(
     val navController = mainNavController
 
     val viewState by viewModel.viewState.collectAsState()
+    val appViewState by appViewModel.viewState.collectAsState()
+
+    LaunchedEffect(key1 = appViewState.isLoggedReady) {
+        if (appViewState.isLoggedReady)
+            navController.popBackStack()
+    }
 
     Column(
         modifier = Modifier
@@ -58,7 +62,10 @@ fun SignInUpTabLayout(
     viewState: LoginViewState,
     viewModel: LoginViewModel
 ) {
-    val tabItems = listOf(stringResource(id = R.string.drawer_sign_in), stringResource(id = R.string.drawer_sign_up))
+    val tabItems = listOf(
+        stringResource(id = R.string.drawer_sign_in),
+        stringResource(id = R.string.drawer_sign_up)
+    )
     val pagerState = rememberPagerState()
     val coroutineScope = rememberCoroutineScope()
 
@@ -107,6 +114,7 @@ fun SignInScreen(
     viewState: LoginViewState,
     viewModel: LoginViewModel
 ) {
+    val appViewModel = appViewModel
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -124,7 +132,7 @@ fun SignInScreen(
                 focusedLabelColor = colors.mainColor
             )
         )
-        
+
         Spacer(modifier = Modifier.height(20.dp))
 
         TextField(
@@ -144,7 +152,13 @@ fun SignInScreen(
 
         Button(
             onClick = {
-                // todo add request to server when get access and refresh tokens
+                if (viewState.passValue.isNotEmpty() && viewState.loginValue.isNotEmpty())
+                    appViewModel.obtainEvent(
+                        AppEvent.Login(
+                            viewState.loginValue,
+                            viewState.passValue
+                        )
+                    )
             },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colors.mainColor

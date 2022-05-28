@@ -6,11 +6,14 @@ data class User(
     val lastName: String = "Khanannov",
     val patronymic: String = "Ildarovich",
     val image: String = "",
-    val isSpecialist: Boolean = false
+    val isSpecialist: Boolean = false,
+    val accessToken: String = "",
+    val refreshToken: String = "",
 ) {
     val fullName = "$name $lastName"
 }
 
+val emptyUser = User(0,"", "", "", "")
 val testUser = User()
 val testUser2 = User(
     id = 1000,

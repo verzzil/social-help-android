@@ -11,16 +11,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.skydoves.landscapist.glide.GlideImage
 import ru.itis.socialhelp.R
-import ru.itis.socialhelp.features.main.models.CategoryItem
 import ru.itis.socialhelp.features.specialists.models.SpecialistItem
+import ru.itis.socialhelp.ui.theme.AppTheme.mainNavController
 
 @Composable
 fun SpecialistView(
@@ -38,10 +39,12 @@ fun SpecialistView(
                 text = specialist.fullName,
                 modifier = Modifier
                     .constrainAs(tFullName) {
+                        width = Dimension.fillToConstraints
                         top.linkTo(parent.top)
-                        start.linkTo(parent.start)
+                        start.linkTo(parent.start, margin = 8.dp)
                         end.linkTo(iAvatar.start)
-                    }
+                    },
+                style = TextStyle(fontWeight = FontWeight.Bold, fontSize = 20.sp)
             )
 
             GlideImage(
@@ -49,7 +52,7 @@ fun SpecialistView(
                 error = ImageBitmap.imageResource(id = R.drawable.img_default_user_avatar),
                 modifier = Modifier
                     .constrainAs(iAvatar) {
-                        end.linkTo(parent.end)
+                        end.linkTo(parent.end, margin = 16.dp)
                         top.linkTo(parent.top)
                         bottom.linkTo(parent.bottom)
                     }
@@ -62,11 +65,14 @@ fun SpecialistView(
                 style = TextStyle(color = Color.Gray, fontSize = 14.sp),
                 modifier = Modifier
                     .constrainAs(tExperience) {
+                        width = Dimension.fillToConstraints
                         start.linkTo(tFullName.start)
                         top.linkTo(tFullName.bottom)
                         end.linkTo(iAvatar.start)
                     }
             )
+
+            createVerticalChain(tFullName, tExperience, chainStyle = ChainStyle.Packed)
         }
     }
 }

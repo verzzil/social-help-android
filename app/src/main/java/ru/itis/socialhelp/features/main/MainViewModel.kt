@@ -7,8 +7,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import ru.itis.socialhelp.data.repositories.CategoriesRepository
 import ru.itis.socialhelp.data.repositories.SpecializationsRepository
+import ru.itis.socialhelp.data.repositories.ProblemsRepository
 import ru.itis.socialhelp.features.base.BaseViewModel
 import ru.itis.socialhelp.features.main.mvi.MainEvent
 import ru.itis.socialhelp.features.main.mvi.MainViewState
@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val categoriesRepository: CategoriesRepository,
     private val specializationsRepository: SpecializationsRepository,
+    private val problemsRepository: ProblemsRepository,
 ) : BaseViewModel<MainViewState, MainEvent>(
     initialState = MainViewState()
 ) {
@@ -28,8 +28,7 @@ class MainViewModel @Inject constructor(
                 _viewState.value.copy(isProblemsLoading = true, isDoctorsLoading = true)
 
             launch(Dispatchers.IO) {
-                delay(3000)
-                val temp = categoriesRepository.findAllCategories()
+                val temp = specializationsRepository.findAllSpecializations()
                 _viewState.value = _viewState.value.copy(
                     isDoctorsLoading = false,
                     categories = temp
@@ -37,16 +36,13 @@ class MainViewModel @Inject constructor(
             }
 
             launch(Dispatchers.IO) {
-                specializationsRepository.findAllProblems()
-                    .collect {
-                        _viewState.value = _viewState.value.copy(
-                            isProblemsLoading = false,
-                            problems = it
-                        )
-                    }
+                val problems = problemsRepository.findAllProblems()
+
+                _viewState.value = _viewState.value.copy(
+                    isProblemsLoading = false,
+                    problems = problems
+                )
             }
-        }.invokeOnCompletion {
-//            Log.i("asdfasdf", "quit")
         }
     }
 
@@ -56,10 +52,5 @@ class MainViewModel @Inject constructor(
                 viewModelScope.cancel()
             }
         }
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.i("asdfasdf", "main viewmodel has cleared")
     }
 }

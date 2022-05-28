@@ -1,6 +1,7 @@
 package ru.itis.socialhelp.features.main
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -21,20 +22,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.itis.socialhelp.R
-import ru.itis.socialhelp.features.main.views.CategoryCard
-import ru.itis.socialhelp.features.main.views.CategoryCardShimmer
 import ru.itis.socialhelp.features.main.views.SpecializationCard
 import ru.itis.socialhelp.features.main.views.SpecializationCardShimmer
+import ru.itis.socialhelp.features.main.views.ProblemCard
+import ru.itis.socialhelp.features.main.views.ProblemCardShimmer
 import ru.itis.socialhelp.navigation.Navigation
+import ru.itis.socialhelp.ui.theme.AppTheme.appViewModel
 import ru.itis.socialhelp.ui.theme.AppTheme.mainNavController
 import ru.itis.socialhelp.ui.theme.LocalColorProvider
-import ru.itis.socialhelp.ui.theme.LocalNavControllerProvider
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(viewModel: MainViewModel) {
     val navController = mainNavController
     val viewState by viewModel.viewState.collectAsState()
+    val appViewState by appViewModel.viewState.collectAsState()
 
     Scaffold(
         topBar = {
@@ -59,15 +61,15 @@ fun MainScreen(viewModel: MainViewModel) {
             LazyRow {
                 if (viewState.isProblemsLoading)
                     items(5) {
-                        SpecializationCardShimmer(
+                        ProblemCardShimmer(
                             modifier = Modifier
                                 .padding(horizontal = 12.dp)
                         )
                     }
                 else
-                    items(viewState.problems) { specialization ->
-                        SpecializationCard(
-                            specialization = specialization,
+                    items(viewState.problems) { problem ->
+                        ProblemCard(
+                            problem = problem,
                             modifier = Modifier
                                 .padding(horizontal = 12.dp)
                                 .clickable(
@@ -113,7 +115,7 @@ fun MainScreen(viewModel: MainViewModel) {
 
             if (viewState.isDoctorsLoading)
                 repeat(3) {
-                    CategoryCardShimmer(
+                    SpecializationCardShimmer(
                         modifier = Modifier
                             .height(140.dp)
                             .padding(
@@ -123,8 +125,8 @@ fun MainScreen(viewModel: MainViewModel) {
                     )
                 }
             else
-                repeat(viewState.categories.size) {
-                    CategoryCard(
+                repeat(4) {
+                    SpecializationCard(
                         modifier = Modifier
                             .height(140.dp)
                             .padding(
@@ -133,7 +135,9 @@ fun MainScreen(viewModel: MainViewModel) {
                             )
                             .clickable(
                                 onClick = {
-//                                    TODO("Логика открытия категории")
+                                    navController.navigate(
+                                        "${Navigation.Specialists.name}/${viewState.categories[it].id}/${viewState.categories[it].title}"
+                                    )
                                 },
                                 indication = rememberRipple(bounded = true),
                                 interactionSource = MutableInteractionSource()

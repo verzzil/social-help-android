@@ -1,6 +1,7 @@
 package ru.itis.socialhelp.features.common
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -22,8 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import ru.itis.socialhelp.features.categories.CategoriesScreen
 import ru.itis.socialhelp.features.categories.CategoriesViewModel
 import ru.itis.socialhelp.features.chat.ChatScreen
@@ -118,9 +121,15 @@ private fun ContentHost(navController: NavController) {
             val chatViewModel = hiltViewModel<ChatViewModel>()
             ChatScreen(viewModel = chatViewModel)
         }
-        composable(Navigation.Profile.name) {
+        composable(
+            "${Navigation.Profile.name}/{profileId}",
+            arguments = listOf(navArgument("profileId") { type = NavType.LongType })
+        ) {
             val profileViewMode = hiltViewModel<ProfileViewModel>()
-            ProfileScreen(viewModel = profileViewMode)
+            ProfileScreen(
+                viewModel = profileViewMode,
+                profileId = it.arguments?.getLong("profileId") ?: 0
+            )
         }
         composable(Navigation.Login.name) {
             val loginViewModel = hiltViewModel<LoginViewModel>()
@@ -130,11 +139,15 @@ private fun ContentHost(navController: NavController) {
             val categoriesViewModel = hiltViewModel<CategoriesViewModel>()
             CategoriesScreen(viewModel = categoriesViewModel)
         }
-        composable("${Navigation.Specialists.name}/{categoryId}") {
+        composable(
+            "${Navigation.Specialists.name}/{categoryId}/{title}",
+            arguments = listOf(navArgument("categoryId") { type = NavType.LongType })
+        ) {
             val specialistsViewModel = hiltViewModel<SpecialistsViewModel>()
             SpecialistsScreen(
                 viewModel = specialistsViewModel,
-                it.arguments?.getLong("categoryId") ?: 0
+                it.arguments?.getLong("categoryId") ?: 0,
+                it.arguments?.getString("title") ?: ""
             )
         }
     }

@@ -1,5 +1,6 @@
 package ru.itis.socialhelp.features.drawer
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -98,7 +99,7 @@ private fun LoggedDrawer(
             DrawerMenuItem(
                 title = stringResource(id = R.string.drawer_my_profile),
                 onClick = {
-                    navController.navigate(Navigation.Profile.name)
+                    navController.navigate("${Navigation.Profile.name}/${viewState.currentUser?.id}")
                 }
             )
             DrawerMenuItem(
@@ -109,12 +110,6 @@ private fun LoggedDrawer(
             )
             DrawerMenuItem(
                 title = stringResource(id = R.string.drawer_my_timetable),
-                onClick = {
-                    // navigate to settings
-                }
-            )
-            DrawerMenuItem(
-                title = stringResource(id = R.string.drawer_settings),
                 onClick = {
                     // navigate to settings
                 }

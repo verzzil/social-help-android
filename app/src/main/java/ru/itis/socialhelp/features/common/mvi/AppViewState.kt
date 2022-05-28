@@ -6,5 +6,6 @@ import ru.itis.socialhelp.features.common.models.testUser
 data class AppViewState(
     val needOpenDrawer: Boolean = false,
     val needCloseDrawer: Boolean = false,
-    val currentUser: User? = testUser
+    val currentUser: User? = null,
+    val isLoggedReady: Boolean = false
 )
