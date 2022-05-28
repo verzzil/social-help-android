@@ -111,7 +111,7 @@ private fun LoggedDrawer(
             DrawerMenuItem(
                 title = stringResource(id = R.string.drawer_my_timetable),
                 onClick = {
-                    // navigate to settings
+                    navController.navigate(Navigation.TimeTable.name)
                 }
             )
             Spacer(modifier = Modifier.weight(1f))

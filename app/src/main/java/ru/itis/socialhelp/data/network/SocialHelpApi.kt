@@ -42,4 +42,9 @@ interface SocialHelpApi {
         @Path("toUser") to: Long,
         @Body timeTableRequest: TimeTableRequest,
     )
+
+    @GET("/timeTable")
+    suspend fun getMyTimeTables(
+        @Header("Authorization") authHeader: String,
+    ) : List<TimeTableResponse>
 }

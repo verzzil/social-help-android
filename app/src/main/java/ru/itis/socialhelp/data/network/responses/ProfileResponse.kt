@@ -3,7 +3,7 @@ package ru.itis.socialhelp.data.network.responses
 data class ProfileResponse(
     val accessToken: Any,
     val additionalInfoForSpecialist: Any,
-    val avatarUrl: String,
+    val avatarUrl: String?,
     val birthday: String,
     val bloodType: String,
     val city: String,
