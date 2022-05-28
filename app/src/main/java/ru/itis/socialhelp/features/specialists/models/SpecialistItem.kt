@@ -8,7 +8,6 @@ data class SpecialistItem(
     val image: String = "",
     val age: Int = 40,
     val experience: Int = 5,
-
 ) {
     val fullName = "$name $lastName $patronymic"
 }
