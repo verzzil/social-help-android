@@ -1,11 +1,11 @@
 package ru.itis.socialhelp.features.main.mvi
 
-import ru.itis.socialhelp.features.main.models.CategoryItem
 import ru.itis.socialhelp.features.main.models.SpecializationItem
+import ru.itis.socialhelp.features.main.models.ProblemItem
 
 data class MainViewState(
     val isProblemsLoading: Boolean = true,
     val isDoctorsLoading: Boolean = true,
-    val problems: List<SpecializationItem> = emptyList(),
-    val categories: List<CategoryItem> = emptyList(),
+    val problems: List<ProblemItem> = emptyList(),
+    val categories: List<SpecializationItem> = emptyList(),
 )

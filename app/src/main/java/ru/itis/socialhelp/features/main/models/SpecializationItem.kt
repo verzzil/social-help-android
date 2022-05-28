@@ -3,26 +3,30 @@ package ru.itis.socialhelp.features.main.models
 data class SpecializationItem(
     val id: Long,
     val title: String,
-    val problem: String,
-    val image: String
 )
 
-val testSpecialization: SpecializationItem = SpecializationItem(0, "Lor", "throat pain", "")
-val testSpecialization2: SpecializationItem =
-    SpecializationItem(1, "Dentist", "dental problems", "")
-val testSpecialization3: SpecializationItem = SpecializationItem(2, "Dentist", "break bones", "")
-val testSpecialization4: SpecializationItem = SpecializationItem(3, "Dentist", "burn", "")
-val testSpecialization5: SpecializationItem =
-    SpecializationItem(4, "Dentist", "rash on the skin", "")
-val testSpecialization6: SpecializationItem = SpecializationItem(5, "Dentist", "warts", "")
-val testSpecialization7: SpecializationItem = SpecializationItem(6, "Dentist", "schwarzenegger", "")
+val testSpecialist = SpecializationItem(0, "Педиатрия")
+val testSpecialist1 = SpecializationItem(0, "Венерология")
+val testSpecialist2 = SpecializationItem(0, "Ортопед")
+val testSpecialist3 = SpecializationItem(0, "Терапевт")
+val testSpecialist4 = SpecializationItem(0, "Гинеколог")
+val testSpecialist5 = SpecializationItem(0, "Дерматолог")
+val testSpecialist6 = SpecializationItem(0, "Психолог")
+val testSpecialist7 = SpecializationItem(0, "Косметолог")
+val testSpecialist8 = SpecializationItem(0, "Невролог")
+val testSpecialist9 = SpecializationItem(0, "ЛОР")
+val testSpecialist10 = SpecializationItem(0, "Офтальмолог")
 
-val testSpecializationList = listOf(
-    testSpecialization,
-    testSpecialization2,
-    testSpecialization3,
-    testSpecialization4,
-    testSpecialization5,
-    testSpecialization6,
-    testSpecialization7
+val testCategoryList = listOf(
+    testSpecialist,
+    testSpecialist1,
+    testSpecialist2,
+    testSpecialist3,
+    testSpecialist4,
+    testSpecialist5,
+    testSpecialist6,
+    testSpecialist7,
+    testSpecialist8,
+    testSpecialist9,
+    testSpecialist10,
 )

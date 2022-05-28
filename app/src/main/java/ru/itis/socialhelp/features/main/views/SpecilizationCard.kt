@@ -2,17 +2,11 @@ package ru.itis.socialhelp.features.main.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.imageResource
@@ -24,15 +18,14 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.skydoves.landscapist.glide.GlideImage
 import ru.itis.socialhelp.R
 import ru.itis.socialhelp.features.common.Shimmer
-import ru.itis.socialhelp.features.common.brush
-import ru.itis.socialhelp.features.main.models.SpecializationItem
+import ru.itis.socialhelp.features.main.models.ProblemItem
 import ru.itis.socialhelp.features.main.models.testSpecialization
 import ru.itis.socialhelp.ui.theme.SocialHelpTheme
 
 @Composable
-fun SpecializationCard(
+fun ProblemCard(
     modifier: Modifier = Modifier,
-    specialization: SpecializationItem,
+    problem: ProblemItem,
 ) {
     Card(
         modifier = modifier
@@ -49,7 +42,7 @@ fun SpecializationCard(
             val (img, tTitle) = createRefs()
 
             GlideImage(
-                imageModel = specialization.image,
+                imageModel = problem.image,
                 previewPlaceholder = R.drawable.lor,
                 error = ImageBitmap.imageResource(id = R.drawable.lor),
                 modifier = Modifier
@@ -66,7 +59,7 @@ fun SpecializationCard(
             )
 
             Text(
-                text = specialization.problem,
+                text = problem.problem,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -86,7 +79,7 @@ fun SpecializationCard(
 }
 
 @Composable
-fun SpecializationCardShimmer(modifier: Modifier = Modifier) {
+fun ProblemCardShimmer(modifier: Modifier = Modifier) {
     Shimmer(
         modifier = modifier
             .width(120.dp)
@@ -100,8 +93,8 @@ fun SpecializationCardShimmer(modifier: Modifier = Modifier) {
 @Composable
 private fun SpecializationItemPreview() {
     SocialHelpTheme {
-        SpecializationCard(
-            specialization = testSpecialization,
+        ProblemCard(
+            problem = testSpecialization,
         )
     }
 }
@@ -110,6 +103,6 @@ private fun SpecializationItemPreview() {
 @Composable
 private fun SpecializationItemShimmerPreview() {
     SocialHelpTheme {
-        SpecializationCardShimmer()
+        ProblemCardShimmer()
     }
 }

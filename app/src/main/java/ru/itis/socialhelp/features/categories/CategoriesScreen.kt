@@ -15,14 +15,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.itis.socialhelp.features.main.views.CategoryCard
-import ru.itis.socialhelp.features.main.views.CategoryCardShimmer
+import ru.itis.socialhelp.features.main.views.SpecializationCard
+import ru.itis.socialhelp.features.main.views.SpecializationCardShimmer
+import ru.itis.socialhelp.navigation.Navigation
+import ru.itis.socialhelp.ui.theme.AppTheme.mainNavController
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CategoriesScreen(
     viewModel: CategoriesViewModel
 ) {
+    val navController = mainNavController
     val viewState by viewModel.viewState.collectAsState()
 
     Scaffold(
@@ -35,7 +38,7 @@ fun CategoriesScreen(
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             if (viewState.isLoading)
                 items(3) {
-                    CategoryCardShimmer(
+                    SpecializationCardShimmer(
                         modifier = Modifier
                             .height(140.dp)
                             .padding(
@@ -46,7 +49,7 @@ fun CategoriesScreen(
                 }
             else
                 items(viewState.categories) { category ->
-                    CategoryCard(
+                    SpecializationCard(
                         specialist = category,
                         modifier = Modifier
                             .height(140.dp)
@@ -56,7 +59,9 @@ fun CategoriesScreen(
                             )
                             .clickable(
                                 onClick = {
-//                                    TODO("Логика открытия категории")
+                                    navController.navigate(
+                                        "${Navigation.Specialists.name}/${category.id}/${category.title}"
+                                    )
                                 },
                                 indication = rememberRipple(bounded = true),
                                 interactionSource = MutableInteractionSource()

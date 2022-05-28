@@ -58,6 +58,7 @@ dependencies {
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_system_ui_controller_version"
     implementation "com.google.accompanist:accompanist-pager:$accompanist_pager_version"
     implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_pager_version"
+    implementation "com.google.accompanist:accompanist-insets:$accompanist_pager_version"
     // endregion
 
     // region Coroutines
