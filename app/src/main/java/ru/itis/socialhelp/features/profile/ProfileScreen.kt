@@ -254,23 +254,25 @@ fun ProfileScreen(
                         )
                     }
 
-                    FloatingActionButton(
-                        modifier = Modifier
-                            .align(Alignment.BottomStart)
-                            .padding(start = 40.dp)
-                            .size(60.dp),
-                        backgroundColor = Color.White,
-                        onClick = {
-                            coroutineScope.launch {
-                                sheetState.show()
-                            }
-                        },
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.ic_baseline_edit_calendar_24),
-                            contentDescription = stringResource(id = R.string.cd_send_message),
-                            tint = colors.profileBackgroundColor
-                        )
+                    if (appViewState.currentUser?.id != viewState.user.id && appViewState.currentUser?.isSpecialist == true) {
+                        FloatingActionButton(
+                            modifier = Modifier
+                                .align(Alignment.BottomStart)
+                                .padding(start = 40.dp)
+                                .size(60.dp),
+                            backgroundColor = Color.White,
+                            onClick = {
+                                coroutineScope.launch {
+                                    sheetState.show()
+                                }
+                            },
+                        ) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_baseline_edit_calendar_24),
+                                contentDescription = stringResource(id = R.string.cd_send_message),
+                                tint = colors.profileBackgroundColor
+                            )
+                        }
                     }
                 }
             }

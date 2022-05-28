@@ -46,6 +46,8 @@ import ru.itis.socialhelp.features.profile.ProfileViewModel
 import ru.itis.socialhelp.features.specialists.SpecialistsScreen
 import ru.itis.socialhelp.features.specialists.SpecialistsViewModel
 import ru.itis.socialhelp.features.splash.SplashScreen
+import ru.itis.socialhelp.features.timetable.TimeTableScreen
+import ru.itis.socialhelp.features.timetable.TimeTableViewModel
 import ru.itis.socialhelp.navigation.Navigation
 import ru.itis.socialhelp.ui.theme.AppTheme.appViewModel
 import ru.itis.socialhelp.ui.theme.AppTheme.mainNavController
@@ -149,6 +151,10 @@ private fun ContentHost(navController: NavController) {
                 it.arguments?.getLong("categoryId") ?: 0,
                 it.arguments?.getString("title") ?: ""
             )
+        }
+        composable(Navigation.TimeTable.name) {
+            val timeTableViewModel = hiltViewModel<TimeTableViewModel>()
+            TimeTableScreen(viewModel = timeTableViewModel)
         }
     }
 }

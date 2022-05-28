@@ -17,7 +17,7 @@ class ProfileRepositoryImpl @Inject constructor(
                 name = firstName,
                 lastName = lastName,
                 patronymic = patronymic,
-                image = /*avatarUrl*/ "",
+                image = avatarUrl ?: "",
                 isSpecialist = specialist,
             )
         }

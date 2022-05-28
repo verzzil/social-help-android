@@ -28,4 +28,7 @@ abstract class RepoModule {
 
     @Binds
     abstract fun bindProfileRepositoryImpl(repo: ProfileRepositoryImpl): ProfileRepository
+
+    @Binds
+    abstract fun bindTimeTableRepositoryImpl(repo: TimeTableRepositoryImpl): TimeTableRepository
 }
