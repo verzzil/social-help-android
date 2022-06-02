@@ -25,7 +25,7 @@ android {
             if (keystorePropsFile.exists()) {
                 keystoreProperties.load(new FileInputStream(keystorePropsFile))
             } else {
-                keystoreProperties['storeFile'] = 'keystore/social_help_keystore'
+                keystoreProperties['storeFile'] = 'social_help_keystore.keystore'
                 keystoreProperties['storePassword'] = System.getenv('KEYSTORE_PASSWORD')
                 keystoreProperties['keyAlias'] = System.getenv('RELEASE_SIGN_KEY_ALIAS')
                 keystoreProperties['keyPassword'] = System.getenv('RELEASE_SIGN_KEY_PASSWORD')
