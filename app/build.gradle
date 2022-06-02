@@ -19,21 +19,16 @@ android {
     }
 
     signingConfigs {
-        release {
+        releaseSigningConfig {
             def keystoreProperties = new Properties()
             def keystorePropsFile = file("keystore/keystore_config")
-
             if (keystorePropsFile.exists()) {
-                file("keystore/social_help_keystore.keystore").withInputStream { keystoreProperties.load(it) }
-                storeFile file("$keystoreProperties.storeFile")
-                storePassword "$keystoreProperties.storePassword"
-                keyAlias "$keystoreProperties.keyAlias"
-                keyPassword "$keystoreProperties.keyPassword"
+                keystoreProperties.load(new FileInputStream(keystorePropsFile))
             } else {
-                storeFile file(System.getenv('KEYSTORE_GIT_REPOSITORY'))
-                storePassword System.getenv('KEYSTORE_PASSWORD')
-                keyAlias System.getenv('RELEASE_SIGN_KEY_ALIAS')
-                keyPassword System.getenv('RELEASE_SIGN_KEY_PASSWORD')
+                keystoreProperties['storeFile'] = 'social_help_keystore.keystore'
+                keystoreProperties['storePassword'] = System.getenv('KEYSTORE_PASSWORD')
+                keystoreProperties['keyAlias'] = System.getenv('RELEASE_SIGN_KEY_ALIAS')
+                keystoreProperties['keyPassword'] = System.getenv('RELEASE_SIGN_KEY_PASSWORD')
             }
         }
     }
