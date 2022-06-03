@@ -28,22 +28,23 @@ jobs:
         with:
           repository: ${{ secrets.KEYSTORE_GIT_REPOSITORY }}
           token: ${{ secrets.KEYSTORE_ACCESS_TOKEN  }}
-          path: keystore
-
-      - name: Run tests and build release artifacts
-        run: |
-          ./gradlew test
-          ./gradlew assembleRelease
-          ./gradlew bundleRelease
-
-      - name: Upload signed APK
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-release.apk
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
-
-      - name: Upload AAB Bundle
-        uses: actions/upload-artifact@v2
-        with:
-          name: app-release.aab
-          path: app/build/outputs/apk/release/app-release.apk
+          path: app/keystore
+        run: echo ${{ secrets.KEYSTORE_PASSWORD }}
+#
+#      - name: Run tests and build release artifacts
+#        run: |
+#          ./gradlew test
+#          ./gradlew assembleRelease
+#          ./gradlew bundleRelease
+#
+#      - name: Upload signed APK
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: app-release.apk
+#          path: app/build/outputs/apk/release/app-release-unsigned.apk
+#
+#      - name: Upload AAB Bundle
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: app-release.aab
+#          path: app/build/outputs/apk/release/app-release.apk
