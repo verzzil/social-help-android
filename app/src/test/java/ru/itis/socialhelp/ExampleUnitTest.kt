@@ -17,6 +17,11 @@ class ExampleUnitTest {
 
     @Test
     fun failedTest() {
-        assertEquals(1, 1 + 1)
+        assertEquals(1, 1 + 0)
+    }
+
+    @Test
+    fun failedTest2() {
+        assertEquals(2, 2 + 0)
     }
 }
